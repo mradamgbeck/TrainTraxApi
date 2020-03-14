@@ -1,0 +1,56 @@
+--------------Names------------------------
+Choo-Choo-Trainer
+Muscle Hustle
+Strength Engine
+TrainTrax
+--------------Road Map---------------------
+Create Profile
+    Name (String)
+    Sex (ENUM)
+    Age (int)
+    Height (feet / meters) (Int)
+    Height (inches / cm) (Int)
+    Starting weight (lb/kg) (double)
+    Starting Body Fat % (double)
+    Imperial / Metric (ENUM)
+    
+Create Workout
+    Add exercises to a workout
+    Specify workout target (muscle groups, push, pull)
+    specify available equipment
+    files down available exercises
+
+Create a plan
+    Specify goals
+    Add created workouts
+    points out gaps in affected muscle groups
+
+Track workout progress
+    can pick a workout
+    loads sets, reps, weight for each exercise
+    can edit sets, reps, weight
+    tracks intensity
+    tracks rest time?
+    auto saves
+    uses current date
+
+Track Body Progress
+    See Chart with:
+        weight
+        body fat %
+        calculated lean mass
+        calculated fat mass
+    Progress Pics
+
+-------------NICE TO HAVE-------------
+
+Create a custom exercise
+    Name (String)
+    muscle group (ENUM)
+    push / pull (ENUM)
+
+Trainer Account
+    Link to clients
+    monitor / edit plan
+
+Calculate Calories / macros
