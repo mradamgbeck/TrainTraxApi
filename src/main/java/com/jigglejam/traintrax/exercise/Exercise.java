@@ -23,8 +23,8 @@ public class Exercise {
     private Long id;
     private String name;
     private MovementType movementType;
-    @OneToOne(cascade = CascadeType.ALL)
-    private MuscleGroup muscleGroup;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Equipment equipment;
+    @OneToMany(cascade = CascadeType.REFRESH)
+    private List<MuscleGroup> muscleGroup;
+    @OneToMany(cascade = CascadeType.REFRESH)
+    private List<Equipment> equipment;
 }
