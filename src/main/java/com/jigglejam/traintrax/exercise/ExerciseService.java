@@ -1,7 +1,7 @@
-package com.jigglejam.traintrax.services;
+package com.jigglejam.traintrax.exercise;
 
-import com.jigglejam.traintrax.entities.Exercise;
-import com.jigglejam.traintrax.repositories.ExerciseRepository;
+import com.jigglejam.traintrax.exercise.Exercise;
+import com.jigglejam.traintrax.exercise.ExerciseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

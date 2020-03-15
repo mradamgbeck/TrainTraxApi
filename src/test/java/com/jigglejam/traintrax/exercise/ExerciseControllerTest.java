@@ -1,7 +1,5 @@
-package com.jigglejam.traintrax.controllers;
+package com.jigglejam.traintrax.exercise;
 
-import com.jigglejam.traintrax.entities.Exercise;
-import com.jigglejam.traintrax.services.ExerciseService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

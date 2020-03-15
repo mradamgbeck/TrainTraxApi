@@ -1,4 +1,4 @@
-package com.jigglejam.traintrax.entities;
+package com.jigglejam.traintrax.exercise;
 
 import com.jigglejam.traintrax.constants.MovementType;
 import com.jigglejam.traintrax.constants.MuscleGroup;
