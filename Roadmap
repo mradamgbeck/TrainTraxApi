@@ -1,9 +1,3 @@
---------------Names------------------------
-Choo-Choo-Trainer
-Muscle Hustle
-Strength Engine
-TrainTrax
---------------Road Map---------------------
 Create Profile
     Name (String)
     Sex (ENUM)
@@ -15,10 +9,11 @@ Create Profile
     Imperial / Metric (ENUM)
     
 Create Workout
-    Add exercises to a workout
+    name a workout
     Specify workout target (muscle groups, push, pull)
     specify available equipment
     files down available exercises
+    Add exercises to a workout
 
 Create a plan
     Specify goals
