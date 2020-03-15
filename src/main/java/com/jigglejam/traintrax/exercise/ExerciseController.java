@@ -8,12 +8,12 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/exercise")
 public class ExerciseController {
-    @Autowired
-    private
-    ExerciseService exerciseService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<Exercise> getAllExercises() {
+    @Autowired
+    private ExerciseService exerciseService;
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public List<Exercise> getAll() {
         return exerciseService.getAll();
     }
 

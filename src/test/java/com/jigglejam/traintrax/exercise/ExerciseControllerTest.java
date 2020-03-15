@@ -37,13 +37,13 @@ public class ExerciseControllerTest {
 
     @Test
     public void getAllCallsExerciseService() {
-        exercises = exerciseController.getAllExercises();
+        exercises = exerciseController.getAll();
         verify(exerciseService, times(1)).getAll();
     }
 
     @Test
     public void getAllReturnsExerciseServiceResponse() {
-        exercises = exerciseController.getAllExercises();
+        exercises = exerciseController.getAll();
         assertEquals(exercise, exercises.get(0));
     }
 
