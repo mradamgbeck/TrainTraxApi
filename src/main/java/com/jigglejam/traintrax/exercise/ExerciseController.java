@@ -14,8 +14,7 @@ public class ExerciseController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Exercise> getAllExercises() {
-        List<Exercise> all = exerciseService.getAll();
-        return all;
+        return exerciseService.getAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
