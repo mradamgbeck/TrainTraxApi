@@ -1,16 +1,14 @@
 package com.jigglejam.traintrax.equipment;
 
-import com.jigglejam.traintrax.equipment.Equipment;
-import com.jigglejam.traintrax.equipment.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/equipment")
+@RequestMapping("api/equipment")
 public class EquipmentController {
-    
+
     @Autowired
     private EquipmentService equipmentService;
 

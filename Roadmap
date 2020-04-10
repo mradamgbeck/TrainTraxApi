@@ -1,51 +1,97 @@
-Create Profile
-    Name (String)
-    Sex (ENUM)
-    Age (int)
-    Height (feet / meters) (Int)
-    Height (inches / cm) (Int)
-    Starting weight (lb/kg) (double)
-    Starting Body Fat % (double)
-    Imperial / Metric (ENUM)
-    
-Create Workout
-    name a workout
-    Specify workout target (muscle groups, push, pull)
-    specify available equipment
-    files down available exercises
-    Add exercises to a workout
+ADMIN ACTIONS:
+    Create Muscle Groups
+        Name (String)
+        isMajor (Boolean)
+        RepsPerWeekMinimum (int)
+        RepsPerWeekMaximum (int)
+        Exercises (Set<Exercise>)
 
-Create a plan
-    Specify goals
-    Add created workouts
-    points out gaps in affected muscle groups
+    Create Exercises
+        Name (String)
+        MovementType (MovementType)
+        MuscleGroups (Set<MuscleGroup>)
+        Equipment (Set<Equipment>)
+        VideoLink (String)
 
-Track workout progress
-    can pick a workout
-    loads sets, reps, weight for each exercise
-    can edit sets, reps, weight
-    tracks intensity
-    tracks rest time?
-    auto saves
-    uses current date
+    Create Equipment
+        Name (String)
+        Exercises (Set<Exercise>)
+        
+TRAINER ACTIONS:
+    Create Trainer Profile
+        Name (String)
+        Email(String)
+        Gym (String)
+        ACE Number (String)
+        Certifications (List<String>)
+        Clients (List<Client>)
+        Picture (String)
 
-Track Body Progress
-    See Chart with:
-        weight
-        body fat %
-        calculated lean mass
-        calculated fat mass
-    Progress Pics
+    Create Client Profile
+        Name (String)
+        Picture (String)
+        Email (String)
+        Sex (ENUM)
+        Age (int)
+        Height (inches / cm) (Int)
+        Imperial / Metric (ENUM)
+        HealthHistory (String)
+        Trainer (Trainer)
+        Assessments (List<Assessment>)
+        Todos (List<String>)
+        Program (Program)
 
--------------NICE TO HAVE-------------
+    Create a Goal
+        Name (String)
+        Description (String)
+        Due Date (Date)
+        
+    Create Exercises
+        Name (String)
+        MuscleGroups(List<MuscleGroup)
+        Equipment (List<Equipment>)
 
-Create a custom exercise
-    Name (String)
-    muscle group (ENUM)
-    push / pull (ENUM)
+    Create Routine
+        Name (String)
+        MuscleGroups (List<MuscleGroup>)
+        Equipment (List<Equipment)
+        Exercises (List<Exercise>)
+        files down available exercises
+        Add exercises to a workout
 
-Trainer Account
-    Link to clients
-    monitor / edit plan
+    Create a Program
+        Name (String)
+        Client (Client)
+        Goal (Goal)
+        Routines (List<Routine>)
+        MuscleGroups (List<MuscleGroups>)
+        AssessmentCadenceInDays (int)
 
-Calculate Calories / macros
+    Create an Assessment
+        Client (Client)
+        Date (Date)
+        Weight (lb/kg) (double)
+        Body Fat % (double)
+        Lean Mass (double)
+        Fat Mass (double)
+        RestingHeartRate (int)
+        RestingSystolicBloodPressure (int)
+        RestingDiastolicBloodPressure (int)
+        Picture (String)
+        AdherencePercentage (double)
+
+    Trainer can Track Body Progress
+        See Chart with:
+            weight
+            body fat %
+            calculated lean mass
+            calculated fat mass
+        Progress Pics
+
+CLIENT ACTIONS:
+        client can pick a routine
+        loads sets, reps, weight from last time
+        tracks rest time
+        auto saves
+        uses current date
+        can add a note

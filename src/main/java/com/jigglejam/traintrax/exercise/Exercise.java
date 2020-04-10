@@ -1,6 +1,9 @@
 package com.jigglejam.traintrax.exercise;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.jigglejam.traintrax.constants.MovementType;
 import com.jigglejam.traintrax.equipment.Equipment;
 import com.jigglejam.traintrax.muscleGroup.MuscleGroup;
@@ -17,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
-@JsonIgnoreProperties({"muscleGroups", "equipment"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Exercise {
 
     @Id
@@ -25,8 +28,10 @@ public class Exercise {
     private Long id;
     private String name;
     private MovementType movementType;
-    @ManyToMany(cascade = CascadeType.REFRESH)
-    private Set<MuscleGroup> muscleGroups;
-    @ManyToMany(cascade = CascadeType.REFRESH)
-    private Set<Equipment> equipment;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<MuscleGroup> exerciseMuscleGroups;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Equipment> exerciseEquipment;
 }

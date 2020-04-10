@@ -1,6 +1,9 @@
 package com.jigglejam.traintrax.equipment;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.jigglejam.traintrax.exercise.Exercise;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,13 +21,14 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
-@JsonIgnoreProperties("exercises")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Equipment {
 
     @Id
     @GeneratedValue
     private Long id;
     private String name;
-    @ManyToMany(mappedBy = "equipment")
-    private Set<Exercise> exercises;
+    @JsonBackReference
+    @ManyToMany(mappedBy = "exerciseEquipment")
+    private Set<Exercise> equipmentExercises;
 }
