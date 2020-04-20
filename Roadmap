@@ -33,8 +33,7 @@ TRAINER ACTIONS:
         Email (String)
         Sex (ENUM)
         Age (int)
-        Height (inches / cm) (Int)
-        Imperial / Metric (ENUM)
+        Height (cm) (Int)
         HealthHistory (String)
         Trainer (Trainer)
         Assessments (List<Assessment>)
@@ -70,7 +69,7 @@ TRAINER ACTIONS:
     Create an Assessment
         Client (Client)
         Date (Date)
-        Weight (lb/kg) (double)
+        Weight (kg) (double)
         Body Fat % (double)
         Lean Mass (double)
         Fat Mass (double)
