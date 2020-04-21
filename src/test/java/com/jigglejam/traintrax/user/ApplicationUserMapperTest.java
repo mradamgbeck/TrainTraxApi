@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -35,7 +35,7 @@ public class ApplicationUserMapperTest {
             .build();
     private final String encodedPassword = "gobbledygook";
     @Mock
-    BCryptPasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
     @InjectMocks
     private
     ApplicationUserMapper applicationUserMapper;
