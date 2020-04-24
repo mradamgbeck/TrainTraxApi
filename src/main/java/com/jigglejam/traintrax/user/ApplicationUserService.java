@@ -18,7 +18,7 @@ public class ApplicationUserService {
 
     public Long create(ApplicationUserDto userDto) {
         ApplicationUser savedUser = userRepository.save(userMapper.convertToEntity(userDto));
-        System.out.println("Registering user: " + savedUser.getUsername());
+        System.out.println("Registering user: " + userRepository.findByUsername(savedUser.getUsername()));
         return savedUser.getId();
     }
 
