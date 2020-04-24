@@ -23,7 +23,7 @@ public class ApplicationUserController {
         return userService.getById(id);
     }
 
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/blarg/{username}", method = RequestMethod.GET)
     @ResponseBody
     public ApplicationUserDto getByUsername(@PathVariable String username) {
         return userService.getByUsername(username);
