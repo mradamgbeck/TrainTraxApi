@@ -2,10 +2,7 @@ package com.jigglejam.traintrax.authentication;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jigglejam.traintrax.user.ApplicationUser;
 import com.jigglejam.traintrax.user.ApplicationUserDto;
-import com.jigglejam.traintrax.user.ApplicationUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,7 +12,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,8 +22,6 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.jigglejam.traintrax.constants.SecurityConstants.*;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    @Autowired
-    ApplicationUserRepository applicationUserRepository;
     private ObjectMapper objectMapper;
     private AuthenticationManager authenticationManager;
 
@@ -61,14 +55,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-        User principal = (User) auth.getPrincipal();
-        String username = principal.getUsername();
-        ApplicationUser appUser = applicationUserRepository.findByUsername(username);
+
         String token = JWT.create()
-                .withSubject(username)
+                .withSubject(((User) auth.getPrincipal()).getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
-        res.addCookie(new Cookie("Role", appUser.getRole()));
     }
 }
