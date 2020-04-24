@@ -38,6 +38,11 @@ public class ApplicationUserService {
         }
     }
 
+    public ApplicationUserDto getByUsername(String username) {
+        ApplicationUser user = userRepository.findByUsername(username);
+        return userMapper.convertToDto(user);
+    }
+
     public List<ApplicationUserDto> getAll() {
         List<ApplicationUser> users = userRepository.findAll();
         return users.stream()

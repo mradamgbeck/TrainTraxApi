@@ -2,10 +2,8 @@ package com.jigglejam.traintrax.authentication;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jigglejam.traintrax.user.ApplicationUser;
 import com.jigglejam.traintrax.user.ApplicationUserDto;
-import com.jigglejam.traintrax.user.ApplicationUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jigglejam.traintrax.user.ApplicationUserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,14 +23,14 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.jigglejam.traintrax.constants.SecurityConstants.*;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    @Autowired
-    ApplicationUserRepository applicationUserRepository;
+    ApplicationUserService applicationUserService;
     private ObjectMapper objectMapper;
     private AuthenticationManager authenticationManager;
 
     public JWTAuthenticationFilter(ObjectMapper objectMapper, AuthenticationManager authenticationManager) {
         this.objectMapper = objectMapper;
         this.authenticationManager = authenticationManager;
+        applicationUserService = new ApplicationUserService();
     }
 
     @Override
@@ -61,8 +59,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
         User user = (User) auth.getPrincipal();
-        System.out.println("auth banana: " + user.getUsername());
-        ApplicationUser appUser = applicationUserRepository.findByUsername(user.getUsername());
+        String username = user.getUsername();
+        System.out.println("auth banana: " + username);
+        ApplicationUserDto appUser = applicationUserService.getByUsername(username);
         System.out.println("Logging in User: " + appUser.getUsername());
         System.out.println("Role: " + appUser.getRole());
         String token = JWT.create()
