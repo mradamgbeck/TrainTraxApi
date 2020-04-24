@@ -17,6 +17,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ApplicationUserServiceTest {
+    private final String username = "Dude";
     @Mock
     ApplicationUserRepository applicationUserRepository;
     @Mock
@@ -24,7 +25,7 @@ public class ApplicationUserServiceTest {
     @InjectMocks
     ApplicationUserService applicationUserService;
     private long applicationUserId = 24L;
-    private ApplicationUser applicationUser = ApplicationUser.builder().id(applicationUserId).build();
+    private ApplicationUser applicationUser = ApplicationUser.builder().id(applicationUserId).username(username).build();
     private ApplicationUserDto applicationUserDto = ApplicationUserDto.builder().id(applicationUserId).build();
 
     @Before
@@ -34,6 +35,7 @@ public class ApplicationUserServiceTest {
         when(applicationUserRepository.save(applicationUser)).thenReturn(applicationUser);
         when(applicationUserRepository.findAll()).thenReturn(Arrays.asList(applicationUser));
         when(applicationUserRepository.findById(applicationUserId)).thenReturn(Optional.of(applicationUser));
+        when(applicationUserRepository.findByUsername(username)).thenReturn(Optional.of(applicationUser));
     }
 
     @Test
@@ -69,6 +71,12 @@ public class ApplicationUserServiceTest {
     @Test
     public void getByIdReturnsApplicationUser() {
         ApplicationUserDto response = applicationUserService.getById(applicationUserId);
+        assertEquals(applicationUserDto, response);
+    }
+
+    @Test
+    public void getByUsernameReturnsApplicationUser() {
+        ApplicationUserDto response = applicationUserService.getByUsername(username);
         assertEquals(applicationUserDto, response);
     }
 

@@ -3,7 +3,6 @@ package com.jigglejam.traintrax.authentication;
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jigglejam.traintrax.user.ApplicationUserDto;
-import com.jigglejam.traintrax.user.ApplicationUserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,14 +22,12 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.jigglejam.traintrax.constants.SecurityConstants.*;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    ApplicationUserService applicationUserService;
     private ObjectMapper objectMapper;
     private AuthenticationManager authenticationManager;
 
     public JWTAuthenticationFilter(ObjectMapper objectMapper, AuthenticationManager authenticationManager) {
         this.objectMapper = objectMapper;
         this.authenticationManager = authenticationManager;
-        applicationUserService = new ApplicationUserService();
     }
 
     @Override
@@ -60,16 +57,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication auth) throws IOException, ServletException {
         User user = (User) auth.getPrincipal();
         String username = user.getUsername();
-        System.out.println("auth banana: " + username);
-        ApplicationUserDto appUser = applicationUserService.getByUsername(username);
-        System.out.println("Logging in User: " + appUser.getUsername());
-        System.out.println("Role: " + appUser.getRole());
         String token = JWT.create()
-                .withSubject(appUser.getUsername())
+                .withSubject(username)
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
-        res.addHeader("Role", appUser.getRole());
-        System.out.println("Response: " + res);
     }
 }

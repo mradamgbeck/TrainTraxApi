@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,7 +33,7 @@ public class AuthUserDetailsServiceTest {
 
     @Before
     public void setup() {
-        when(applicationUserRepository.findByUsername(username)).thenReturn(applicationUser);
+        when(applicationUserRepository.findByUsername(username)).thenReturn(Optional.of(applicationUser));
         actualUser = authUserDetailsService.loadUserByUsername(username);
     }
 

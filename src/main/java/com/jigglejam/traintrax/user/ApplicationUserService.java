@@ -20,10 +20,6 @@ public class ApplicationUserService {
         userDto.setIsEnabled(true);
         ApplicationUser appUser = userMapper.convertToEntity(userDto);
         ApplicationUser savedUser = userRepository.save(appUser);
-        System.out.println("UserDto: " + userDto);
-        System.out.println("mappedUser: " + appUser);
-        System.out.println("Saved User: " + savedUser);
-        System.out.println("User in Repo: " + userRepository.findByUsername(savedUser.getUsername()));
         return savedUser.getId();
     }
 
@@ -39,8 +35,13 @@ public class ApplicationUserService {
     }
 
     public ApplicationUserDto getByUsername(String username) {
-        ApplicationUser user = userRepository.findByUsername(username);
-        return userMapper.convertToDto(user);
+        Optional<ApplicationUser> maybeUser = userRepository.findByUsername(username);
+        if (maybeUser.isPresent()) {
+            ApplicationUser user = maybeUser.get();
+            return userMapper.convertToDto(user);
+        } else {
+            return null;
+        }
     }
 
     public List<ApplicationUserDto> getAll() {
