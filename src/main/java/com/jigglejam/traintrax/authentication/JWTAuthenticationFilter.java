@@ -61,12 +61,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
         User user = (User) auth.getPrincipal();
-        System.out.println("auth banana: " + user);
+        System.out.println("auth banana: " + user.getUsername());
         ApplicationUser appUser = applicationUserRepository.findByUsername(user.getUsername());
         System.out.println("Logging in User: " + appUser.getUsername());
         System.out.println("Role: " + appUser.getRole());
         String token = JWT.create()
-                .withSubject(((User) auth.getPrincipal()).getUsername())
+                .withSubject(appUser.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
