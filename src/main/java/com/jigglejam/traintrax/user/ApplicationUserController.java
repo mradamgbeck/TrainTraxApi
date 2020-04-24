@@ -23,6 +23,12 @@ public class ApplicationUserController {
         return userService.getById(id);
     }
 
+    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+    @ResponseBody
+    public ApplicationUserDto getById(@PathVariable String username) {
+        return userService.getByUsername(username);
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
     public List<ApplicationUserDto> getAll() {
