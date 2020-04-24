@@ -61,7 +61,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
         User user = (User) auth.getPrincipal();
-        System.out.println("auth banana: " + auth);
+        System.out.println("auth banana: " + user);
         ApplicationUser appUser = applicationUserRepository.findByUsername(user.getUsername());
         System.out.println("Logging in User: " + appUser.getUsername());
         System.out.println("Role: " + appUser.getRole());
