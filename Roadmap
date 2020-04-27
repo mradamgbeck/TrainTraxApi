@@ -23,7 +23,6 @@ TRAINER ACTIONS:
         Email(String)
         Gym (String)
         ACE Number (String)
-        Certifications (List<String>)
         Clients (List<Client>)
         Picture (String)
 
@@ -37,7 +36,6 @@ TRAINER ACTIONS:
         HealthHistory (String)
         Trainer (Trainer)
         Assessments (List<Assessment>)
-        Todos (List<String>)
         Program (Program)
 
     Create a Goal

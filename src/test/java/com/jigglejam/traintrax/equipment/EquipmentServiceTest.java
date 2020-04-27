@@ -1,8 +1,5 @@
 package com.jigglejam.traintrax.equipment;
 
-import com.jigglejam.traintrax.exercise.Exercise;
-import com.jigglejam.traintrax.exercise.ExerciseRepository;
-import com.jigglejam.traintrax.exercise.ExerciseService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,78 +19,78 @@ import static org.mockito.Mockito.*;
 public class EquipmentServiceTest {
 
     @Mock
-    ExerciseRepository exerciseRepository;
+    EquipmentRepository equipmentRepository;
 
     @InjectMocks
-    ExerciseService exerciseService;
-    private long exerciseId = 24L;
-    private Exercise exercise = Exercise.builder().id(exerciseId).build();
+    EquipmentService equipmentService;
+    private long equipmentId = 24L;
+    private Equipment equipment = Equipment.builder().id(equipmentId).build();
 
     @Before
     public void setup() {
-        when(exerciseRepository.save(exercise)).thenReturn(exercise);
-        when(exerciseRepository.findAll()).thenReturn(Arrays.asList(exercise));
-        when(exerciseRepository.findById(exerciseId)).thenReturn(Optional.of(exercise));
+        when(equipmentRepository.save(equipment)).thenReturn(equipment);
+        when(equipmentRepository.findAll()).thenReturn(Arrays.asList(equipment));
+        when(equipmentRepository.findById(equipmentId)).thenReturn(Optional.of(equipment));
     }
 
     @Test
-    public void createSavesExerciseInRepository() {
-        exerciseService.create(exercise);
-        verify(exerciseRepository, times(1)).save(exercise);
+    public void createSavesEquipmentInRepository() {
+        equipmentService.create(equipment);
+        verify(equipmentRepository, times(1)).save(equipment);
     }
 
     @Test
-    public void createReturnsSavedExercise() {
-        Exercise response = exerciseService.create(this.exercise);
-        assertEquals(response, exercise);
+    public void createReturnsSavedEquipment() {
+        Equipment response = equipmentService.create(equipment);
+        assertEquals(response, equipment);
     }
 
     @Test
-    public void updateSavesExerciseInRepository() {
-        exerciseService.update(exercise);
-        verify(exerciseRepository, times(1)).save(exercise);
+    public void updateSavesEquipmentInRepository() {
+        equipmentService.update(equipment);
+        verify(equipmentRepository, times(1)).save(equipment);
     }
 
     @Test
-    public void updateReturnsSavedExercise() {
-        Exercise response = exerciseService.update(this.exercise);
-        assertEquals(response, exercise);
+    public void updateReturnsSavedEquipment() {
+        Equipment response = equipmentService.update(equipment);
+        assertEquals(response, equipment);
     }
 
     @Test
-    public void deleteRemovesExerciseFromRepository() {
-        exerciseService.delete(exerciseId);
-        verify(exerciseRepository).deleteById(exerciseId);
+    public void deleteRemovesEquipmentFromRepository() {
+        equipmentService.delete(equipmentId);
+        verify(equipmentRepository).deleteById(equipmentId);
     }
 
     @Test
     public void getAllGetsAllFromRepository() {
-        exerciseService.getAll();
-        verify(exerciseRepository, times(1)).findAll();
+        equipmentService.getAll();
+        verify(equipmentRepository, times(1)).findAll();
     }
 
     @Test
-    public void getAllReturnsListOfAllExercises() {
-        List<Exercise> response = exerciseService.getAll();
-        assertEquals(response.get(0), exercise);
+    public void getAllReturnsListOfAllEquipments() {
+        List<Equipment> response = equipmentService.getAll();
+        assertEquals(response.get(0), equipment);
     }
 
     @Test
     public void getByIdFindsByIdFromRepository() {
-        exerciseService.getById(exerciseId);
-        verify(exerciseRepository, times(1)).findById(exerciseId);
+        equipmentService.getById(equipmentId);
+        verify(equipmentRepository, times(1)).findById(equipmentId);
     }
 
     @Test
-    public void getAllReturnsExercise() {
-        Exercise response = exerciseService.getById(exerciseId);
-        assertEquals(response, exercise);
+    public void getAllReturnsEquipment() {
+        Equipment response = equipmentService.getById(equipmentId);
+        assertEquals(response, equipment);
     }
 
     @Test
-    public void getAllReturnsNullIfNoExercise(){
-        when(exerciseRepository.findById(exerciseId)).thenReturn(Optional.empty());
-        Exercise response = exerciseService.getById(exerciseId);
+    public void getAllReturnsNullIfNoEquipment() {
+        when(equipmentRepository.findById(equipmentId)).thenReturn(Optional.empty());
+        Equipment response = equipmentService.getById(equipmentId);
         assertNull(response);
     }
 }

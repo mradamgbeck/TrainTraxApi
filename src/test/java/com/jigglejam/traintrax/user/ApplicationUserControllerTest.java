@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserControllerTest {
+public class ApplicationUserControllerTest {
 
     @Mock
     ApplicationUserService applicationUserService;
@@ -25,12 +25,14 @@ public class UserControllerTest {
     private List<ApplicationUser> applicationUsers;
     private long applicationUserId = 12L;
     private ApplicationUserDto applicationUser = ApplicationUserDto.builder().id(applicationUserId).build();
+    private String username = "Dude";
 
     @Before
     public void setup() {
         when(applicationUserService.getAll()).thenReturn(
                 Collections.singletonList(applicationUser));
         when(applicationUserService.getById(applicationUserId)).thenReturn(applicationUser);
+        when(applicationUserService.getByUsername(username)).thenReturn(applicationUser);
         when(applicationUserService.create(applicationUser)).thenReturn(applicationUser.getId());
     }
 
@@ -55,6 +57,18 @@ public class UserControllerTest {
     @Test
     public void getByIdReturnsApplicationUserFromApplicationUserService() {
         ApplicationUserDto response = applicationUserController.getById(applicationUserId);
+        assertEquals(applicationUser, response);
+    }
+
+    @Test
+    public void getByUsernameCallsApplicationUserServiceWithId() {
+        applicationUserController.getByUsername(username);
+        verify(applicationUserService, times(1)).getByUsername(username);
+    }
+
+    @Test
+    public void getByUsernameReturnsApplicationUserFromApplicationUserService() {
+        ApplicationUserDto response = applicationUserController.getByUsername(username);
         assertEquals(applicationUser, response);
     }
 
