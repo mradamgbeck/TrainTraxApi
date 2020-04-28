@@ -30,7 +30,7 @@ TRAINER ACTIONS:
         Email (String)
         Picture (String)
         Sex (ENUM)
-        Age (int)
+        Birthday (LocalDateTime)
         Height (cm) (Int)
         HealthHistory (String)
         Trainer (Trainer)

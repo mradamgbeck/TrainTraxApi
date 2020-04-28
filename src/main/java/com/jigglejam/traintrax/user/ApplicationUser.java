@@ -18,8 +18,8 @@ public
 class ApplicationUser {
 
     @Id
+    @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
     private String email;
     private String password;

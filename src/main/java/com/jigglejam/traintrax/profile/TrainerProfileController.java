@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/trainerProfile")
+@RequestMapping("api/trainer-profile")
 public class TrainerProfileController {
 
     @Autowired

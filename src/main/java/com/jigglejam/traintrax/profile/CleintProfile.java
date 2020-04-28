@@ -8,23 +8,27 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "trainer_profile")
-public class TrainerProfile {
+@Table(name = "client_profile")
+public class CleintProfile {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String aceNumber;
-    private LocalDateTime certificationExpirationDate;
-    @OneToMany(mappedBy = "trainer", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private Set<CleintProfile> clients;
+
+    private String sex;
+    private LocalDateTime birthday;
+    private int heightInCentimeters;
+    private String history;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trainer_id")
+    private TrainerProfile trainer;
     @OneToOne
     @MapsId
     private ApplicationUser applicationUser;
