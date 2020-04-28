@@ -11,8 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ApplicationUserDto {
     private Long id;
-    private String username;
+    private String email;
     private String password;
     private String role;
+    private String firstName;
+    private String lastName;
     private Boolean isEnabled;
 }

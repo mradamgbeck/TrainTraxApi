@@ -33,7 +33,7 @@ public class JWTAuthenticationFilterTest {
     private ObjectMapper objectMapper = Mockito.mock(ObjectMapper.class);
     private AuthenticationManager authenticationManager = Mockito.mock(AuthenticationManager.class);
     private ApplicationUserDto userDto = ApplicationUserDto.builder()
-            .username(username)
+            .email(username)
             .password(password).build();
     private HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
 
@@ -49,7 +49,7 @@ public class JWTAuthenticationFilterTest {
     @Test
     public void itReturnsAnAuthenticationWhenAttempted() {
         Authentication authentication = jwtAuthenticationFilter.attemptAuthentication(mockRequest, new MockHttpServletResponse());
-        assertEquals(authentication.getPrincipal(), userDto.getUsername());
+        assertEquals(authentication.getPrincipal(), userDto.getEmail());
         assertEquals(authentication.getCredentials(), userDto.getPassword());
         assertTrue(authentication.isAuthenticated());
     }

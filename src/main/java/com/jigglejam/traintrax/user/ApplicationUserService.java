@@ -35,7 +35,7 @@ public class ApplicationUserService {
     }
 
     public ApplicationUserDto getByUsername(String username) {
-        Optional<ApplicationUser> maybeUser = userRepository.findByUsername(username);
+        Optional<ApplicationUser> maybeUser = userRepository.findByEmail(username);
         if (maybeUser.isPresent()) {
             ApplicationUser user = maybeUser.get();
             return userMapper.convertToDto(user);

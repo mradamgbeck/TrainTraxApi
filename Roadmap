@@ -21,15 +21,14 @@ TRAINER ACTIONS:
     Create Trainer Profile
         Name (String)
         Email(String)
-        Gym (String)
-        ACE Number (String)
-        Clients (List<Client>)
+        AceNumber (String)
         Picture (String)
+        Clients (List<Client>)
 
     Create Client Profile
         Name (String)
-        Picture (String)
         Email (String)
+        Picture (String)
         Sex (ENUM)
         Age (int)
         Height (cm) (Int)

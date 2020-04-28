@@ -13,9 +13,11 @@ public class ApplicationUserMapper {
     public ApplicationUser convertToEntity(ApplicationUserDto dto) {
         return ApplicationUser.builder()
                 .id(dto.getId())
-                .username(dto.getUsername())
+                .email(dto.getEmail())
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .role(dto.getRole())
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName())
                 .isEnabled(dto.getIsEnabled())
                 .build();
     }
@@ -23,8 +25,10 @@ public class ApplicationUserMapper {
     public ApplicationUserDto convertToDto(ApplicationUser user) {
         return ApplicationUserDto.builder()
                 .id(user.getId())
-                .username(user.getUsername())
+                .email(user.getEmail())
                 .role(user.getRole())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .isEnabled(user.getIsEnabled())
                 .build();
     }

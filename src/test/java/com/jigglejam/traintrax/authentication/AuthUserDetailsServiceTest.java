@@ -19,10 +19,10 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class AuthUserDetailsServiceTest {
 
-    private final String username = "dude";
+    private final String email = "dude";
     private final String password = "sweet";
     private final ApplicationUser applicationUser = ApplicationUser.builder()
-            .username(username)
+            .email(email)
             .password(password)
             .build();
     @Mock
@@ -33,18 +33,18 @@ public class AuthUserDetailsServiceTest {
 
     @Before
     public void setup() {
-        when(applicationUserRepository.findByUsername(username)).thenReturn(Optional.of(applicationUser));
-        actualUser = authUserDetailsService.loadUserByUsername(username);
+        when(applicationUserRepository.findByEmail(email)).thenReturn(Optional.of(applicationUser));
+        actualUser = authUserDetailsService.loadUserByUsername(email);
     }
 
     @Test
     public void itFindsTheUserByUsername() {
-        verify(applicationUserRepository).findByUsername(username);
+        verify(applicationUserRepository).findByEmail(email);
     }
 
     @Test
     public void itReturnsAUserWithTheApplicationUsersCredentials() {
-        assertEquals(applicationUser.getUsername(), actualUser.getUsername());
+        assertEquals(applicationUser.getEmail(), actualUser.getUsername());
         assertEquals(applicationUser.getPassword(), actualUser.getPassword());
     }
 }
